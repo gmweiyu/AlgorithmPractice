@@ -46,4 +46,28 @@ public class ListNode {
             head = head.next;
         }
     }
+
+    /**
+     * 从给定的链表中找到指定value的结点
+     * 如果给定value在链表中存在重复结点，则返回第一个出现的
+     * @param value 指定value
+     * @return 目标value的结点
+     */
+    public static ListNode getListNode(ListNode head, int value) {
+        if (head == null) {
+            return null;
+        }
+        while (head != null) {
+            if (head.val == value) {
+                return head;
+            }
+            head=head.next;
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Value: "+val;
+    }
 }
