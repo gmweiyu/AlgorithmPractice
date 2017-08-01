@@ -52,28 +52,57 @@ public class TreeNode {
     }
 
     /**
-     * 横向（BFS）打印给定二叉树所有结点的值
-     * @param root 二叉树的根结点
+     * 横向打印给定二叉树，默认不分层打印
+     * @param root
      */
     public static void printTreeNode(TreeNode root) {
+        printTreeNode(root,false);
+    }
+
+    /**
+     * 横向（BFS）打印给定二叉树所有结点的值
+     *
+     * @param root 二叉树的根结点
+     * @param hierarchy 是否按照树的层级打印
+     */
+    public static void printTreeNode(TreeNode root, boolean hierarchy) {
         if (root == null) {
             return;
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
+        // 当前层需要打印的元素个数
+        int curCount = 1;
+        int nextCount = 0;
         while (!queue.isEmpty()) {
             TreeNode cur = queue.poll();
 
-            if (cur == null) {
-                continue;
-            }
             if (cur == nullNode) {
                 System.out.print(".");
             } else {
                 System.out.print(cur.val);
             }
-            queue.offer(cur.left);
-            queue.offer(cur.right);
+            if (cur.left != null) {
+                queue.offer(cur.left);
+                if (hierarchy) {
+                    nextCount++;
+                }
+            }
+            if (cur.right != null) {
+                queue.offer(cur.right);
+                if (hierarchy) {
+                    nextCount++;
+                }
+            }
+            if (hierarchy) {
+                // 当前层待打印数目-1
+                curCount--;
+                if (curCount == 0) {
+                    System.out.println();
+                    curCount = nextCount;
+                    nextCount = 0;
+                }
+            }
         }
         System.out.println();
     }
