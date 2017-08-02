@@ -1,6 +1,6 @@
 package interview;
 
-import toolkit.ListNode;
+import util.ListNode;
 
 /**
  * Created by GuoWeiyu on 2017/07/28.

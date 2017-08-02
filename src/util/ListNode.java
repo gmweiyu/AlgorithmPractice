@@ -1,4 +1,4 @@
-package toolkit;
+package util;
 
 /**
  * Created by GuoWeiyu on 2017/07/28.

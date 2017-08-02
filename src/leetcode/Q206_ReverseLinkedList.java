@@ -1,6 +1,6 @@
 package leetcode;
 
-import toolkit.ListNode;
+import util.ListNode;
 
 /**
  * Created by Weasley on 2017-04-06.

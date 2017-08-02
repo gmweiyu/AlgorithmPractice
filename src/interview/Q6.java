@@ -1,6 +1,6 @@
 package interview;
 
-import toolkit.ListNode;
+import util.ListNode;
 
 import java.util.Stack;
 

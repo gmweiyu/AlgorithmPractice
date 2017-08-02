@@ -1,6 +1,6 @@
 package interview;
 
-import toolkit.TreeNode;
+import util.TreeNode;
 
 /**
  * Created by GuoWeiyu on 2017/08/01.

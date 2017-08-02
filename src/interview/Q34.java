@@ -1,6 +1,6 @@
 package interview;
 
-import toolkit.TreeNode;
+import util.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package interview;
 
-import toolkit.DeListNode;
-import toolkit.TreeNode;
+import util.DeListNode;
+import util.TreeNode;
 
 /**
  * Created by GuoWeiyu on 2017/08/02.
