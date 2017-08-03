@@ -10,11 +10,66 @@ import util.TreeNode;
 public class Q36 {
     public static void main(String[] args) {
         TreeNode root = TreeNode.generate("6483579");
-        DeListNode head=convert(root);
+
+        // 第一种方法
+        convert(root);
+
+        // 第二种方法
+        DeListNode head=myConvert(root);
         System.out.println(head);
+
+
     }
 
-    private static DeListNode convert(TreeNode root) {
+    /**
+     * 根据树的中序遍历，即可生成对应的双向链表
+     * 注意：不需要另外创建双向链表，直接使用二叉树的left/right指代双向链表的prev/next
+     */
+    // 保存当前遍历的最大（右）结点，不断更新并链接整个Tree
+    private static TreeNode lastNode;
+
+    private static void convert(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        internalConvert(root);
+        
+        // 当前lastNode指向的是最后一个结点
+        while (lastNode.left != null) {
+            lastNode = lastNode.left;
+        }
+
+        System.out.println(lastNode);
+    }
+
+    private static void internalConvert(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+
+        // 递归处理左子树
+        if (node.left != null) {
+            internalConvert(node.left);
+        }
+
+        // 双向链接当前结点
+        node.left = lastNode;
+        if (lastNode != null) {
+            lastNode.right=node;
+        }
+
+        // 链接后更新当前最大结点
+        lastNode = node;
+
+        // 递归处理右子树
+        if (node.right != null) {
+            internalConvert(node.right);
+        }
+    }
+
+
+
+    private static DeListNode myConvert(TreeNode root) {
         if (root == null) {
             return null;
         }
@@ -61,20 +116,5 @@ public class Q36 {
             }
         }
         return node;
-    }
-
-
-    /**
-     * 根据树的中序遍历，即可生成对应的双向链表
-     */
-    private static DeListNode optimizeConvert(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
-        return null;
-    }
-
-    private static DeListNode internalConvert(TreeNode node, DeListNode deListNode) {
-        return null;
     }
 }

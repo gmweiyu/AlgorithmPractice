@@ -1,5 +1,7 @@
 package interview;
 
+import util.TreeNode;
+
 /**
  * Created by GuoWeiyu on 2017/07/24.
  * Description: 根据先序、中序重建二叉树
@@ -20,7 +22,7 @@ public class Q7 {
         System.out.println(dummy.left);
     }
 
-    private static TreeNode solve(int currentPosition,int start, int end) {
+    private static TreeNode solve(int currentPosition, int start, int end) {
         if (start > end) {
             return null;
         }
@@ -49,12 +51,4 @@ public class Q7 {
         return -1;
     }
 
-    private static class TreeNode{
-        int value;
-        TreeNode left,right;
-
-        public TreeNode(int value) {
-            this.value = value;
-        }
-    }
 }
