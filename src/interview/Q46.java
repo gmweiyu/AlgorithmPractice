@@ -27,9 +27,12 @@ public class Q46 {
             int unitDigit = digits[i + 1] - '0';
             int translatedNum = decadeDigit * 10 + unitDigit;
             if (translatedNum >= 10 && translatedNum <= 25) {
+                // 由最后两位构成
                 if (i == length - 2) {
                     count += 1;
-                } else {
+                }
+                // 非最后两位构成
+                else {
                     count += counts[i + 2];
                 }
             }

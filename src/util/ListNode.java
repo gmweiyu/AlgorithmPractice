@@ -66,6 +66,20 @@ public class ListNode {
         return null;
     }
 
+    /**
+     * 遍历所给链表的头结点，找到此链表的长度
+     * @param head 链表头结点
+     * @return  链表长度
+     */
+    public static int length(ListNode head) {
+        int length=0;
+        while (head != null) {
+            length++;
+            head=head.next;
+        }
+        return length;
+    }
+
     @Override
     public String toString() {
         return "Value: "+val;
