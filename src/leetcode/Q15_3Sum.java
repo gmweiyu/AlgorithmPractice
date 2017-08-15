@@ -86,6 +86,7 @@ public class Q15_3Sum {
         List<List<Integer>> ans=new ArrayList<>();
         int n=nums.length;
         for(int i=0;i<n;i++) {
+            // 处理重复数字
             if(i>0&&nums[i]==nums[i-1])
                 continue;
             int j=i+1,k=n-1;

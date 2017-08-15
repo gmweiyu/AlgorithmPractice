@@ -8,31 +8,34 @@ import java.util.*;
 public class Q18_4Sum {
     public static void main(String[] args) {
         int[] nums={-3,-2,-1,0,0,1,2,3};
-        System.out.println(fourSum_2(nums,0));
+        System.out.println(fourSum(nums,0));
     }
 
     public static List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
         List<List<Integer>> ans=new ArrayList<>();
         for(int i=0;i<nums.length-3;i++) {
+            // 处理重复情况
             if(i>0&&nums[i]==nums[i-1])
                 continue;
 
             int j=i+1,k=nums.length-1;
             while (j < k) {
+                // 计算最后一个数字
                 int aux=nums[i]+nums[j]+nums[k]-target;
                 int auxIndex=0;
+                // 查找是否含有最后一个数字
                 if(j+1<k-1)
                     auxIndex = Arrays.binarySearch(nums,j+1,k-1, -aux);
                 if (auxIndex >= 0) {
-                    j++;
-                    k--;
-                    List list = new ArrayList();
+                   List<Integer> list = new ArrayList<>();
                     list.add(nums[i]);
                     list.add(nums[j]);
                     list.add(nums[k]);
                     list.add(-aux);
                     ans.add(list);
+                    j++;
+                    k--;
                     while (j < k && nums[j] == nums[j - 1] && nums[k] == nums[k + 1]) {
                         j++;
                         k--;

@@ -7,48 +7,66 @@ import util.TreeNode;
  * Description: 根据先序、中序重建二叉树
  */
 public class Q7 {
-    //    static int[] pre = {1, 2, 4, 7, 3, 5, 6, 8};
-//    static int[] mid = {4, 7, 2, 1, 5, 3, 8, 6};
-    static int[] pre = {1, 2, 4, 6, 9, 7, 3, 5, 8};
-    static int[] mid = {2, 6, 9, 4, 7, 1, 5, 8, 3};
     public static void main(String[] args) {
-        // invalid input
-        if (pre == null || mid == null) {
-            return;
-        }
-        TreeNode dummy = new TreeNode(-1);
-        dummy.left = solve(0, 0, 7);
-        dummy.right=null;
-        System.out.println(dummy.left);
+        int[] preorder = {1, 2, 4, 6, 9, 7, 3, 5, 8};
+        int[] inorder = {2, 6, 9, 4, 7, 1, 5, 8, 3};
+        TreeNode root = buildTree(preorder, inorder);
+        System.out.println(root.val);
+        TreeNode.printTreeNode(root);
     }
 
-    private static TreeNode solve(int currentPosition, int start, int end) {
-        if (start > end) {
+    /**
+     * 构建二叉树
+     * @return 二叉树的root结点
+     */
+    private static TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null) {
             return null;
         }
-        // 当前结点（父结点）的值
-        int currentValue = pre[currentPosition];
-        TreeNode currentNode = new TreeNode(currentValue);
+        return internalBuild(preorder, inorder, 0, 0, preorder.length-1);
+    }
+
+    /**
+     * 实际的构建函数，递归构造左右子树
+     * @param preorder  先序
+     * @param inorder   中序
+     * @param indexPre  当前子树的root结点在preorder中的index
+     * @param startIn   当前子树的root结点在inorder中的起始index
+     * @param endIn     当前子树的root结点在inorder中的结束index
+     * @return  当前子树的root结点
+     */
+    private static TreeNode internalBuild(int[] preorder, int[] inorder, int indexPre, int startIn, int endIn) {
+        // 退出条件
+        if (startIn > endIn) {
+            return null;
+        }
+        // 根据indexPre对应的值构建当前node
+        int value = preorder[indexPre];
+        TreeNode node = new TreeNode(value);
         // 当前结点在中序的位置
-        int midPosition = findPosition(currentValue);
+        int indexIn = findPosition(value, inorder);
         // 计算左子树的结点数，以此推出右结点在pre中的位置
-        int leftCount=midPosition-start;
-        // 递归重建二叉树
-        currentNode.left = solve(currentPosition + 1, start, midPosition - 1);
-        currentNode.right = solve(currentPosition + leftCount+1, midPosition + 1, end);
-        return currentNode;
+        int leftCount = indexIn - startIn;
+        // 递归构建二叉树
+        node.left = internalBuild(preorder, inorder, indexPre + 1, startIn, indexIn - 1);
+        node.right = internalBuild(preorder, inorder, indexPre + leftCount + 1, indexIn + 1, endIn);
+        return node;
     }
 
     /**
      * 找到一个结点在中序中的位置
+     * ！可考虑使用HashMap提前存储对应位置，避免每次都使用线性时间查找
+     * {@link leetcode.Q106_ConstructBinaryTree2#buildTree(int[], int[])}
      */
-    private static int findPosition(int target) {
-        for (int i = 0; i < mid.length; i++) {
-            if (mid[i] == target) {
-                return i;
+    private static int findPosition(int target, int[] inorder) {
+        int index=0;
+        for (int i = 0; i < inorder.length; i++) {
+            if (inorder[i] == target) {
+                index=i;
+                break;
             }
         }
-        return -1;
+        return index;
     }
 
 }

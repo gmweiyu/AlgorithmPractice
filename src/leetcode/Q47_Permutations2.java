@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Created by Weasley on 2017-03-20.
+ * 存在重复元素的全排列：[1,1,2]
+ * 在从左到右遍历vis数组时，如果重复元素在前且为访问则跳过
  */
 public class Q47_Permutations2 {
     public static void main(String[] args) {

@@ -9,10 +9,10 @@ import java.util.List;
  */
 public class Q46_Permutations {
     public static void main(String[] args) {
-        int[] nums = {1, 2, 3};
+        int[] nums = {1, 2, 3, 4};
 //        permu(nums,0);
-//        permu_2(new ArrayList<>(), nums, new boolean[nums.length]);
-        permu_3(nums);
+        permu_2(new ArrayList<>(), nums, new boolean[nums.length]);
+//        permu_3(nums);
     }
 
     //Solution 1

@@ -41,6 +41,7 @@ public class Q1_TwoSum {
 
         for(int i=0;i<nums.length;i++) {
             int complement = target-nums[i];
+            // 目标元素已经存在，且不为当前元素
             if (map.containsKey(complement)&&map.get(complement)!=i) {
                 return new int[]{i, map.get(complement)};
             }
